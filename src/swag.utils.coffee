@@ -20,8 +20,13 @@ Utils.isFunc = (value) ->
 Utils.isString = (value) ->
     typeof value is 'string'
 
-Utils.result = (value) ->
-    if Utils.isFunc value then value() else value
+Utils.result = (value, ctx) ->
+    if window.Ember and ctx
+        return ctx.get(value)
+    else if Utils.isFunc(value)
+        return value()
+    else
+        value
 
 Utils.err = (msg) ->
     throw new Error msg

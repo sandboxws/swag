@@ -28,10 +28,7 @@ Swag.registerHelpers = (localHandlebars) ->
             Swag.Handlebars = require 'handlebars'
 
     Swag.registerHelper = (name, helper) ->
-        if window? and window.Ember
-            Swag.Handlebars.helper name, helper
-        else
-            Swag.Handlebars.registerHelper name, helper
+        Swag.Handlebars.registerHelper name, helper
 
     for name, helper of Swag.helpers
         Swag.registerHelper name, helper

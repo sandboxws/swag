@@ -158,7 +158,7 @@ Swag.addHelper 'inArray', (array, value, options) ->
 
 Swag.addHelper 'eachIndex', (array, options) ->
     unless Utils.isUndefined array
-        array = Utils.result array
+        array = Utils.result array, @
         result = ''
 
         for value, index in array
@@ -167,6 +167,18 @@ Swag.addHelper 'eachIndex', (array, options) ->
         result
     else
         Utils.err '{{eachIndex}} takes one argument (array).'
+
+Swag.addHelper 'eachIndexPlusOne', (array, options) ->
+    unless Utils.isUndefined array
+        array = Utils.result array, @
+        result = ''
+
+        for value, index in array
+            result += options.fn item: value, index: index + 1
+
+        result
+    else
+        Utils.err '{{eachIndexPlusOne}} takes one argument (array).'
 
 Swag.addHelper 'eachProperty', (obj, options) ->
     unless Utils.isUndefined obj
