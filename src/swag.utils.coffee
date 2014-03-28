@@ -22,7 +22,9 @@ Utils.isString = (value) ->
 
 Utils.result = (value, ctx) ->
     if window.Ember and ctx
-        return ctx.get(value)
+        return ctx.get(value) if ctx["get"] and ctx.get(value)
+        return ctx[value] if ctx[value]
+        value
     else if Utils.isFunc(value)
         return value()
     else
