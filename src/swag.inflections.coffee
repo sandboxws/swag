@@ -1,8 +1,8 @@
 Swag.addHelper 'inflect', (count, singular, plural, include) ->
     unless (Utils.isUndefined count) and (Utils.isUndefined singular) and (Utils.isUndefined plural)
-        count = parseFloat Utils.result count
-        singular = Utils.result singular
-        plural = Utils.result plural
+        count = parseFloat Utils.result count, @
+        singular = Utils.result singular, @
+        plural = Utils.result plural, @
         word = if count > 1 or count is 0 then plural else singular
         if Utils.isUndefined(include) or include is false then word else "#{count} #{word}"
     else
@@ -10,7 +10,7 @@ Swag.addHelper 'inflect', (count, singular, plural, include) ->
 
 Swag.addHelper 'ordinalize', (value) ->
     unless Utils.isUndefined value
-        value = parseFloat Utils.result value
+        value = parseFloat Utils.result value, @
         normal = Math.abs Math.round value
 
         if (normal % 100) in [11..13]

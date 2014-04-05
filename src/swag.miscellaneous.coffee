@@ -1,7 +1,7 @@
 Swag.addHelper 'default', (value, defaultValue) ->
     unless (Utils.isHandlebarsSpecific value) and (Utils.isUndefined defaultValue)
-        value = Utils.result value
-        defaultValue = Utils.result defaultValue
+        value = Utils.result value, @
+        defaultValue = Utils.result defaultValue, @
         value or defaultValue
     else
         Utils.err '{{default}} takes two arguments (string|number, string|number).'
@@ -9,10 +9,10 @@ Swag.addHelper 'default', (value, defaultValue) ->
 unless Ember?
     Swag.addHelper 'partial', (name, data, template) ->
         unless (Utils.isUndefined name)
-            name = Utils.result name
-            data = Utils.result data
+            name = Utils.result name, @
+            data = Utils.result data, @
             path = Swag.Config.partialsPath + name
-            template = Utils.result template unless Utils.isUndefined template
+            template = Utils.result template, @ unless Utils.isUndefined template
 
             unless Swag.Handlebars.partials[name]?
                 if !Utils.isUndefined template
